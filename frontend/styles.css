@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .centered-section {
@@ -44,4 +44,5 @@ h1 {
   font-size: 5rem;
   text-transform: uppercase;
   color: #fff;
+  letter-spacing: 0.2rem;
 }
