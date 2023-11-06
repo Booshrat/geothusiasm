@@ -16,6 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -50,3 +51,7 @@ h1 {
   display: none;
 }
 
+#start-message {
+  color: #fff;
+  font-size: 40px;
+}
