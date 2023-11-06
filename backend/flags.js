@@ -314,3 +314,4 @@ const flags =
     }
 
 ]    
+module.exports = flags
