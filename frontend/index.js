@@ -172,3 +172,6 @@ document.addEventListener("keydown", function (e) {
     closeModal();
   }
 });
+
+const nextBtn = document.querySelector(".next-btn");
+nextBtn.addEventListener("click", randomFlag);

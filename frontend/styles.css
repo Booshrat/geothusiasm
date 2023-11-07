@@ -120,3 +120,7 @@ h1 {
 .modal li {
   padding: 5px 0;
 }
+
+.next-btn {
+  display: none;
+}
