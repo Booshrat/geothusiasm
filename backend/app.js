@@ -1,5 +1,6 @@
 
 const express = require('express');
+const fs = require('fs');
 const cors = require("cors");
 const logger = require("./logger");
 const countries = require("./flags");
@@ -12,7 +13,7 @@ app.use(express.json())
 app.use(logger);
 
 app.get('/', (req, res) => {
-    res.send("Welcome to geothusiasm")
+    res.send(`Hello geothusiasm - There are ${countries.length} countries available.`)
 })
 
 app.get('/countries', (req, res) => {
