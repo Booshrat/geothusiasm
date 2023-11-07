@@ -77,10 +77,13 @@ async function randomFlag() {
       rightAnswer,
     ]);
 
-    console.log(answers);
+    const right = rightAnswer;
+
+    //console.log(answers);
 
     function addToArray(answers) {
       ans.push(answers);
+      rightAns.push(right)
     }
     answers.forEach(addToArray);
 
@@ -100,8 +103,10 @@ async function randomFlag() {
   }
 }
 
+let rightAns = [];
 let ans = [];
-console.log(ans);
+//console.log(ans);
+console.log(rightAns);
 
 async function wrongCountries(rightAnswer) {
   try {
@@ -155,6 +160,16 @@ function handleButtonClick(event) {
 
   nextBtn.style.display = "block";
   // Do something with the selected answer
+
+ 
+  if (selectedAnswer === rightAns[0]) {
+    event.target.style.backgroundColor = "green"
+    console.log("You are correct!")
+  } else {
+    event.target.style.backgroundColor = "red"
+    console.log("WRONG!")
+  }
+
 }
 
 const modal = document.querySelector(".modal");
