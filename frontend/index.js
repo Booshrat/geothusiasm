@@ -1,18 +1,18 @@
-const axios = require('axios'); // allows to make HTTP requests from a web application.
-
 async function randomFlag() {
     try {
-        const response = await axios.get("https://geothusiasm-0gow.onrender.com/countries/random");
-        const flag = response.data.flag;
-        const fact = response.data.fact;
+        const response = await fetch("https://geothusiasm-0gow.onrender.com/countries/random");
+        const data = await response.json();
+        console.log(data.flag)
+        const flag = data.flag;
+        const fact = data.fact;
 
-        const rightAnswer = response.data.country
+        const rightAnswer = data.country
 
         const wrongAnswers = await wrongCountries(rightAnswer);
 
         const answers = shuffle([wrongAnswers, rightAnswer]);
 
-        console.log(flag);
+        //console.log(flag);
         console.log('Right Answer:', rightAnswer);
         console.log('Wrong Answers:', wrongAnswers);
 
@@ -27,9 +27,11 @@ randomFlag();
 
 async function wrongCountries(rightAnswer) {
     try {
-        const response = await axios.get("https://geothusiasm-0gow.onrender.com/countries");
+        const response = await fetch("https://geothusiasm-0gow.onrender.com/countries");
+        const data = await response.json();
+        console.log(data.country)
 
-        const countries = response.data.filter(country => country !== rightAnswer);
+        const countries = data.filter(country => country !== rightAnswer);
 
         const shuffledCountries = shuffle(countries);
         return shuffledCountries.slice(0, 3);
@@ -46,6 +48,8 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
 
 const start = document.querySelector("#start");
 const leaderBoard = document.querySelector("#leader-board");
@@ -84,4 +88,4 @@ function addToBoard(e){
 
 function startGame () {
     startMessage.remove();
-}
+} 
