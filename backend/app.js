@@ -4,6 +4,7 @@ const fs = require('fs');
 const cors = require("cors");
 const logger = require("./logger");
 const countries = require("./flags");
+const fs = require("fs")
 
 //const countries = require(./countries)
 const app = express();
