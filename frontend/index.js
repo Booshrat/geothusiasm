@@ -12,6 +12,13 @@ async function randomFlag() {
 
         const answers = shuffle([wrongAnswers, rightAnswer]);
 
+        //console.log(answers);
+
+        function addToArray(answers) {
+            ans.push(answers);
+        }
+        addToArray(answers);
+
         //console.log(flag);
         console.log('Right Answer:', rightAnswer);
         console.log('Wrong Answers:', wrongAnswers);
@@ -24,14 +31,17 @@ async function randomFlag() {
 }
 randomFlag();
 
+let ans = [];
+console.log(ans);
+
 
 async function wrongCountries(rightAnswer) {
     try {
         const response = await fetch("https://geothusiasm-0gow.onrender.com/countries");
         const data = await response.json();
-        console.log(data.country)
+        //console.log(data.country)
 
-        const countries = data.filter(country => country !== rightAnswer);
+        const countries = data.map(countryObj => countryObj.country).filter(country => country !== rightAnswer);
 
         const shuffledCountries = shuffle(countries);
         return shuffledCountries.slice(0, 3);
@@ -88,4 +98,29 @@ function addToBoard(e){
 
 function startGame () {
     startMessage.remove();
+
+    createButtons(ans);
 } 
+
+function createButtons(ans) {
+    const container = document.createElement('div')
+    container.classList.add('button-container');
+
+    ans.forEach(answer => {
+        const button = document.createElement('button');
+        button.textContent = answer;
+        button.addEventListener('click', handleButtonClick);
+        container.appendChild(button);
+    });
+
+    const section = document.querySelector('.hero')
+
+    section.appendChild(container);
+}
+
+
+function handleButtonClick(event) {
+    const selectedAnswer = event.target.textContent;
+    console.log('Selected Answer:', selectedAnswer);
+    // Do something with the selected answer
+}
