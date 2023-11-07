@@ -47,19 +47,22 @@ function startGame() {
 
 async function randomFlag() {
   try {
+
     const response = await fetch(
       "https://geothusiasm-0gow.onrender.com/countries/random"
     );
     const data = await response.json();
-
-    document.querySelector("#guess-flag").style.display = "block";
-
+    
     console.log(data.flag);
     const flag = data.flag;
-
+    
     const flagImg = document.querySelector("#flag-img");
     flagImg.setAttribute("src", flag);
-
+    
+    flagImg.onload = function() {
+      // Only display the flag when the image is fully loaded
+      document.querySelector("#guess-flag").style.display = "block";
+    }
     const fact = data.fact;
     const rightAnswer = data.country;
 
@@ -84,7 +87,12 @@ async function randomFlag() {
     //console.log(flag);
     console.log("Right Answer:", rightAnswer);
     console.log("Wrong Answers:", wrongAnswers);
+    
+    // const nextClicked = nextBtn.addEventListener("click", );
+    
     createButtons(ans);
+    
+    nextBtn.style.display = "none";
 
     //console.log(fact);
   } catch (error) {
@@ -126,9 +134,9 @@ function shuffle(array) {
 function createButtons() {
   const container = document.createElement("div");
   container.classList.add("button-container");
-
+  
   const shuffleAnswers = shuffle(ans);
-
+  
   shuffleAnswers.forEach((answer) => {
     const button = document.createElement("button");
     button.textContent = answer;
@@ -138,11 +146,14 @@ function createButtons() {
 
   const section = document.querySelector(".hero");
   section.appendChild(container);
+  // nextBtn.style.display = "none";
 }
 
 function handleButtonClick(event) {
   const selectedAnswer = event.target.textContent;
   console.log("Selected Answer:", selectedAnswer);
+
+  nextBtn.style.display = "block";
   // Do something with the selected answer
 }
 
@@ -175,3 +186,4 @@ document.addEventListener("keydown", function (e) {
 
 const nextBtn = document.querySelector(".next-btn");
 nextBtn.addEventListener("click", randomFlag);
+nextBtn.addEventListener("click", )

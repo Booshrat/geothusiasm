@@ -19,6 +19,8 @@ body {
 .help {
   height: 5vh;
   background-color: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  left: 93%;
 }
 
 .hero {
@@ -45,10 +47,15 @@ button {
   color: #fff;
   border: none;
   border-radius: 20px;
-  margin: 0 10px;
+  margin: 10px;
   cursor: pointer;
   font-size: 1.1rem;
   padding: 30px;
+}
+
+button:hover {
+  border: #0096c7 3px solid;
+  margin: 7px;
 }
 
 h1 {
@@ -61,6 +68,13 @@ h1 {
 
 #player-name {
   display: none;
+}
+
+.name-input {
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 20px;
+  width: 70%;
 }
 
 #start-message {
@@ -113,11 +127,20 @@ h1 {
   background: none;
 }
 
+.close-modal:hover {
+  border: none;
+}
+
+.modal h3 {
+  font-size: 35px;
+}
+
 .modal ol {
   padding: 25px;
 }
 
 .modal li {
+  font-size: 20px;
   padding: 5px 0;
 }
 
