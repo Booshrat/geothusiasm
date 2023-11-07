@@ -14,9 +14,12 @@
     <script defer src="./index.js"></script>
   </head>
   <body>
+    <nav class="help">
+      <button>Help</button>
+    </nav>
     <section class="hero">
       <div class="text-overlay">
-        <h1>Geothusiasm</h1>
+        <h1 id="geo">Geothusiasm</h1>
         <div class="button-container">
           <button id="start">Start Game</button>
           <button id="leader-board">Leader Board</button>
@@ -27,6 +30,22 @@
         </div>
       </div>
       <h2 id="start-message"></h2>
+      <h2 id="guess-flag">Guess The Flag</h2>
+      <img id="flag-img">
+      <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <h3>How to play</h3>
+        <ol>
+          <li>Click on 'Start Game' button</li>
+          <li>Insert your name and press enter or click 'Submit' button</li>
+          <li>A countdown for 3 seconds will start</li>
+          <li>A flag will appear on screen with 4 answer buttons</li>
+          <li>Click on the name of the country you believe the flag belongs to</li>
+          <li>It will show if your answer is correct or not and will display an interesting fact about the country</li>
+          <li>Click 'Next' button to go to the next round</li>
+        </ol>
+      </div>
+      <div class="overlay hidden"></div>
     </section>
   </body>
 </html>
