@@ -10,14 +10,21 @@ async function randomFlag() {
 
         const wrongAnswers = await wrongCountries(rightAnswer);
 
-        const answers = shuffle([wrongAnswers, rightAnswer]);
+        //const answers = shuffle([wrongAnswers, rightAnswer]);
+
+        const answers = shuffle([
+            wrongAnswers[0],
+            wrongAnswers[1],
+            wrongAnswers[2],
+            rightAnswer,
+          ]);
 
         //console.log(answers);
 
         function addToArray(answers) {
             ans.push(answers);
         }
-        addToArray(answers);
+        answers.forEach(addToArray);
 
         //console.log(flag);
         console.log('Right Answer:', rightAnswer);
@@ -102,11 +109,13 @@ function startGame () {
     createButtons(ans);
 } 
 
-function createButtons(ans) {
+function createButtons() {
     const container = document.createElement('div')
     container.classList.add('button-container');
 
-    ans.forEach(answer => {
+    const shuffleAnswers = shuffle(ans);
+
+    shuffleAnswers.forEach(answer => {
         const button = document.createElement('button');
         button.textContent = answer;
         button.addEventListener('click', handleButtonClick);
@@ -114,7 +123,6 @@ function createButtons(ans) {
     });
 
     const section = document.querySelector('.hero')
-
     section.appendChild(container);
 }
 
