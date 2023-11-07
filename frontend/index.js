@@ -62,7 +62,21 @@ async function randomFlag() {
 
         const wrongAnswers = await wrongCountries(rightAnswer);
 
-        const answers = shuffle([wrongAnswers, rightAnswer]);
+        //const answers = shuffle([wrongAnswers, rightAnswer]);
+
+        const answers = shuffle([
+            wrongAnswers[0],
+            wrongAnswers[1],
+            wrongAnswers[2],
+            rightAnswer,
+          ]);
+
+        //console.log(answers);
+
+        function addToArray(answers) {
+            ans.push(answers);
+        }
+        answers.forEach(addToArray);
 
         //console.log(flag);
         console.log('Right Answer:', rightAnswer);
@@ -75,14 +89,17 @@ async function randomFlag() {
     }
 }
 
+let ans = [];
+console.log(ans);
+
 
 async function wrongCountries(rightAnswer) {
     try {
         const response = await fetch("https://geothusiasm-0gow.onrender.com/countries");
         const data = await response.json();
-        console.log(data.country)
+        //console.log(data.country)
 
-        const countries = data.filter(country => country !== rightAnswer);
+        const countries = data.map(countryObj => countryObj.country).filter(country => country !== rightAnswer);
 
         const shuffledCountries = shuffle(countries);
         return shuffledCountries.slice(0, 3);
@@ -99,6 +116,36 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function startGame () {
+    startMessage.remove();
+
+    createButtons(ans);
+} 
+
+function createButtons() {
+    const container = document.createElement('div')
+    container.classList.add('button-container');
+
+    const shuffleAnswers = shuffle(ans);
+
+    shuffleAnswers.forEach(answer => {
+        const button = document.createElement('button');
+        button.textContent = answer;
+        button.addEventListener('click', handleButtonClick);
+        container.appendChild(button);
+    });
+
+    const section = document.querySelector('.hero')
+    section.appendChild(container);
+}
+
+
+function handleButtonClick(event) {
+    const selectedAnswer = event.target.textContent;
+    console.log('Selected Answer:', selectedAnswer);
+    // Do something with the selected answer
 }
 
 const modal = document.querySelector('.modal');
@@ -127,4 +174,5 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
 
