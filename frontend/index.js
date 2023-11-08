@@ -46,28 +46,25 @@ function startGame() {
 
 async function randomFlag() {
   try {
-
     const response = await fetch(
       "https://geothusiasm-0gow.onrender.com/countries/random"
     );
     const data = await response.json();
-    
+
     console.log(data.flag);
     const flag = data.flag;
-    
+
     const flagImg = document.querySelector("#flag-img");
     flagImg.setAttribute("src", flag);
-    
-    flagImg.onload = function() {
+
+    flagImg.onload = function () {
       // Only display the flag when the image is fully loaded
       document.querySelector("#guess-flag").style.display = "block";
-    }
+    };
     const fact = data.fact;
     const rightAnswer = data.country;
 
     const wrongAnswers = await wrongCountries(rightAnswer);
-
-    //const answers = shuffle([wrongAnswers, rightAnswer]);
 
     const answers = shuffle([
       wrongAnswers[0],
@@ -78,25 +75,22 @@ async function randomFlag() {
 
     const right = rightAnswer;
 
-    //console.log(answers);
-
     rightAns = [];
     ans = [];
 
     function addToArray(answers) {
       ans.push(answers);
-      rightAns.push(right)
+      rightAns.push(right);
     }
     answers.forEach(addToArray);
 
-    //console.log(flag);
     console.log("Right Answer:", rightAnswer);
     console.log("Wrong Answers:", wrongAnswers);
-    
+
     // const nextClicked = nextBtn.addEventListener("click", );
-    
+
     createButtons(ans);
-    
+
     nextBtn.style.display = "none";
 
     //console.log(fact);
@@ -104,11 +98,9 @@ async function randomFlag() {
     console.log(error);
   }
 }
-
+//let wrongAns = [];
 let rightAns = [];
 let ans = [];
-//console.log(ans);
-console.log(rightAns);
 
 async function wrongCountries(rightAnswer) {
   try {
@@ -141,22 +133,22 @@ function shuffle(array) {
 function createButtons() {
   const container = document.createElement("div");
   container.classList.add("button-container");
-  
+
   const shuffleAnswers = shuffle(ans);
-  
+
   shuffleAnswers.forEach((answer) => {
     const button = document.createElement("button");
     button.textContent = answer;
     button.addEventListener("click", handleButtonClick);
     container.appendChild(button);
   });
-  
+
   const section = document.querySelector(".hero");
 
   // Clearing the previously appended (if any) button-container
   const child = document.querySelector(".button-container");
-  console.log("Err"+child);
-  
+  console.log("Err" + child);
+
   if (child.parentNode) {
     child.parentNode.removeChild(child);
   }
@@ -164,23 +156,35 @@ function createButtons() {
   section.appendChild(container);
   // nextBtn.style.display = "none";
 }
-
+let wrongCounter = 0;
 function handleButtonClick(event) {
   const selectedAnswer = event.target.textContent;
+  const answerDisplay = document.querySelectorAll(".button-container button");
+  let count = 0;
   console.log("Selected Answer:", selectedAnswer);
 
   nextBtn.style.display = "block";
   // Do something with the selected answer
 
- 
   if (selectedAnswer === rightAns[0]) {
-    event.target.style.backgroundColor = "green"
-    console.log("You are correct!")
+    event.target.style.backgroundColor = "green";
+    console.log("You are correct!");
   } else {
-    event.target.style.backgroundColor = "red"
-    console.log("WRONG!")
+    event.target.style.backgroundColor = "red";
+    for (let country of answerDisplay) {
+      if (country.textContent === rightAns[0])
+        country.style.backgroundColor = "green";
+    }
+    wrongCounter++;
+    console.log("WRONG!");
+    if (wrongCounter === 3) {
+      console.log("stop game");
+    }
   }
 
+  answerDisplay.forEach((button) => {
+    button.disabled = true;
+  });
 }
 
 const modal = document.querySelector(".modal");
