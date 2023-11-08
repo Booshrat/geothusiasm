@@ -2,6 +2,9 @@ const start = document.querySelector("#start");
 const leaderBoard = document.querySelector("#leader-board");
 start.addEventListener("click", buttonsToForm);
 const nameEnter = document.querySelector("#player-name");
+let score = 0;
+const scoreDisp = document.querySelector("#score");
+let playerName;
 
 function buttonsToForm(e) {
   start.remove();
@@ -14,6 +17,9 @@ nameEnter.addEventListener("submit", addToBoard);
 let startMessage = document.querySelector("#start-message");
 
 function addToBoard(e) {
+  playerName = document.querySelector(".name-input").value;
+  console.log(playerName);
+
   e.preventDefault();
   nameEnter.remove();
   let count = 3;
@@ -147,7 +153,6 @@ function createButtons() {
 
   // Clearing the previously appended (if any) button-container
   const child = document.querySelector(".button-container");
-  console.log("Err" + child);
 
   if (child.parentNode) {
     child.parentNode.removeChild(child);
@@ -185,6 +190,13 @@ function handleButtonClick(event) {
   answerDisplay.forEach((button) => {
     button.disabled = true;
   });
+    score++;
+    console.log(score);
+    scoreDisp.textContent = `Your Score is ${score}`;
+  } else {
+    event.target.style.backgroundColor = "red";
+    console.log("WRONG!");
+  }
 }
 
 const modal = document.querySelector(".modal");
@@ -208,7 +220,7 @@ btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
 document.addEventListener("keydown", function (e) {
-  console.log(e.key);
+  //console.log(e.key);
   if (e.key === "Escape" && !modal.classList.contains("hidden")) {
     closeModal();
   }

@@ -28,7 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 95vh;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.55);
 }
 
@@ -146,4 +146,11 @@ h1 {
 
 .next-btn {
   display: none;
+  position: absolute;
+  bottom: 3rem;
+}
+
+#score {
+  font-size: 40px;
+  color: #fff;
 }
