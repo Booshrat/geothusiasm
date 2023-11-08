@@ -42,7 +42,6 @@ function startGame() {
   randomFlag();
   document.querySelector(".hero").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
   document.querySelector("nav").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
-  startMessage.remove();
 }
 
 async function randomFlag() {
@@ -80,6 +79,9 @@ async function randomFlag() {
     const right = rightAnswer;
 
     //console.log(answers);
+
+    rightAns = [];
+    ans = [];
 
     function addToArray(answers) {
       ans.push(answers);
@@ -148,8 +150,17 @@ function createButtons() {
     button.addEventListener("click", handleButtonClick);
     container.appendChild(button);
   });
-
+  
   const section = document.querySelector(".hero");
+
+  // Clearing the previously appended (if any) button-container
+  const child = document.querySelector(".button-container");
+  console.log("Err"+child);
+  
+  if (child.parentNode) {
+    child.parentNode.removeChild(child);
+  }
+
   section.appendChild(container);
   // nextBtn.style.display = "none";
 }
@@ -201,4 +212,3 @@ document.addEventListener("keydown", function (e) {
 
 const nextBtn = document.querySelector(".next-btn");
 nextBtn.addEventListener("click", randomFlag);
-nextBtn.addEventListener("click", )
