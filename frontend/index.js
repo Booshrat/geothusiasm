@@ -174,12 +174,15 @@ function handleButtonClick(event) {
   if (selectedAnswer === rightAns[0]) {
     event.target.style.backgroundColor = "green";
     console.log("You are correct!");
+    score++;
+    console.log(score);
+    scoreDisp.textContent = `Your Score is ${score}`;
   } else {
     event.target.style.backgroundColor = "red";
     for (let country of answerDisplay) {
       if (country.textContent === rightAns[0])
         country.style.backgroundColor = "green";
-    }
+    } 
     wrongCounter++;
     console.log("WRONG!");
     if (wrongCounter === 3) {
@@ -190,14 +193,8 @@ function handleButtonClick(event) {
   answerDisplay.forEach((button) => {
     button.disabled = true;
   });
-    score++;
-    console.log(score);
-    scoreDisp.textContent = `Your Score is ${score}`;
-  } else {
-    event.target.style.backgroundColor = "red";
-    console.log("WRONG!");
-  }
-}
+ 
+  } 
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
