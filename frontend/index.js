@@ -44,6 +44,7 @@ function addToBoard(e) {
 }
 
 function startGame() {
+  scoreDisp.textContent = `Your Score is ${score}`;
   startMessage.remove();
   randomFlag();
   document.querySelector(".hero").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
@@ -162,10 +163,12 @@ function createButtons() {
   // nextBtn.style.display = "none";
 }
 let wrongCounter = 0;
+const restartButton = document.createElement("button");
+
 function handleButtonClick(event) {
   const selectedAnswer = event.target.textContent;
   const answerDisplay = document.querySelectorAll(".button-container button");
-  let count = 0;
+  const sectionOne = document.querySelector(".hero");
   console.log("Selected Answer:", selectedAnswer);
 
   nextBtn.style.display = "block";
@@ -182,19 +185,32 @@ function handleButtonClick(event) {
     for (let country of answerDisplay) {
       if (country.textContent === rightAns[0])
         country.style.backgroundColor = "green";
-    } 
+    }
     wrongCounter++;
     console.log("WRONG!");
     if (wrongCounter === 3) {
       console.log("stop game");
+      restartButton.textContent = "Restart Game";
+      nextBtn.style.display = "none";
+      restartButton.addEventListener("click", () => {
+        console.log("Hi");
+        restartGame();
+      });
+      sectionOne.append(restartButton);
     }
   }
 
   answerDisplay.forEach((button) => {
     button.disabled = true;
   });
- 
-  } 
+}
+
+function restartGame() {
+  score = 0;
+  startGame();
+  wrongCounter = 0;
+  restartButton.remove();
+}
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
