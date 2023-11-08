@@ -67,13 +67,10 @@ async function randomFlag() {
       // Only display the flag when the image is fully loaded
       document.querySelector("#guess-flag").style.display = "block";
     };
-
     const fact = data.fact;
     const rightAnswer = data.country;
 
     const wrongAnswers = await wrongCountries(rightAnswer);
-
-    //const answers = shuffle([wrongAnswers, rightAnswer]);
 
     const answers = shuffle([
       wrongAnswers[0],
@@ -84,8 +81,6 @@ async function randomFlag() {
 
     const right = rightAnswer;
 
-    //console.log(answers);
-
     rightAns = [];
     ans = [];
 
@@ -95,7 +90,6 @@ async function randomFlag() {
     }
     answers.forEach(addToArray);
 
-    //console.log(flag);
     console.log("Right Answer:", rightAnswer);
     console.log("Wrong Answers:", wrongAnswers);
 
@@ -110,11 +104,9 @@ async function randomFlag() {
     console.log(error);
   }
 }
-
+//let wrongAns = [];
 let rightAns = [];
 let ans = [];
-//console.log(ans);
-console.log(rightAns);
 
 async function wrongCountries(rightAnswer) {
   try {
@@ -169,9 +161,11 @@ function createButtons() {
   section.appendChild(container);
   // nextBtn.style.display = "none";
 }
-
+let wrongCounter = 0;
 function handleButtonClick(event) {
   const selectedAnswer = event.target.textContent;
+  const answerDisplay = document.querySelectorAll(".button-container button");
+  let count = 0;
   console.log("Selected Answer:", selectedAnswer);
 
   nextBtn.style.display = "block";
@@ -180,6 +174,22 @@ function handleButtonClick(event) {
   if (selectedAnswer === rightAns[0]) {
     event.target.style.backgroundColor = "green";
     console.log("You are correct!");
+  } else {
+    event.target.style.backgroundColor = "red";
+    for (let country of answerDisplay) {
+      if (country.textContent === rightAns[0])
+        country.style.backgroundColor = "green";
+    }
+    wrongCounter++;
+    console.log("WRONG!");
+    if (wrongCounter === 3) {
+      console.log("stop game");
+    }
+  }
+
+  answerDisplay.forEach((button) => {
+    button.disabled = true;
+  });
     score++;
     console.log(score);
     scoreDisp.textContent = `Your Score is ${score}`;
