@@ -1,10 +1,12 @@
+// const e = require("express");
+
 const start = document.querySelector("#start");
 const leaderBoard = document.querySelector("#leader-board");
 start.addEventListener("click", buttonsToForm);
 const nameEnter = document.querySelector("#player-name");
 let score = 0;
 const scoreDisp = document.querySelector("#score");
-let playerName;
+let playerName = "";
 
 function buttonsToForm(e) {
   start.remove();
@@ -224,3 +226,19 @@ document.addEventListener("keydown", function (e) {
 
 const nextBtn = document.querySelector(".next-btn");
 nextBtn.addEventListener("click", randomFlag);
+
+async function addToScoreBoard(e) {
+  e.preventDefault();
+  const finalScore = {
+    name: playerName,
+    score: score,
+  };
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(finalScore),
+  };
+  const response = await fetch("http://localhost:3000/scoreboard", options);
+}
