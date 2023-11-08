@@ -2,6 +2,9 @@ const start = document.querySelector("#start");
 const leaderBoard = document.querySelector("#leader-board");
 start.addEventListener("click", buttonsToForm);
 const nameEnter = document.querySelector("#player-name");
+let score = 0;
+const scoreDisp = document.querySelector("#score");
+let playerName;
 
 function buttonsToForm(e) {
   start.remove();
@@ -14,6 +17,9 @@ nameEnter.addEventListener("submit", addToBoard);
 let startMessage = document.querySelector("#start-message");
 
 function addToBoard(e) {
+  playerName = document.querySelector(".name-input").value;
+  console.log(playerName);
+
   e.preventDefault();
   nameEnter.remove();
   let count = 3;
@@ -46,22 +52,22 @@ function startGame() {
 
 async function randomFlag() {
   try {
-
     const response = await fetch(
       "https://geothusiasm-0gow.onrender.com/countries/random"
     );
     const data = await response.json();
-    
+
     console.log(data.flag);
     const flag = data.flag;
-    
+
     const flagImg = document.querySelector("#flag-img");
     flagImg.setAttribute("src", flag);
-    
-    flagImg.onload = function() {
+
+    flagImg.onload = function () {
       // Only display the flag when the image is fully loaded
       document.querySelector("#guess-flag").style.display = "block";
-    }
+    };
+
     const fact = data.fact;
     const rightAnswer = data.country;
 
@@ -85,18 +91,18 @@ async function randomFlag() {
 
     function addToArray(answers) {
       ans.push(answers);
-      rightAns.push(right)
+      rightAns.push(right);
     }
     answers.forEach(addToArray);
 
     //console.log(flag);
     console.log("Right Answer:", rightAnswer);
     console.log("Wrong Answers:", wrongAnswers);
-    
+
     // const nextClicked = nextBtn.addEventListener("click", );
-    
+
     createButtons(ans);
-    
+
     nextBtn.style.display = "none";
 
     //console.log(fact);
@@ -141,22 +147,21 @@ function shuffle(array) {
 function createButtons() {
   const container = document.createElement("div");
   container.classList.add("button-container");
-  
+
   const shuffleAnswers = shuffle(ans);
-  
+
   shuffleAnswers.forEach((answer) => {
     const button = document.createElement("button");
     button.textContent = answer;
     button.addEventListener("click", handleButtonClick);
     container.appendChild(button);
   });
-  
+
   const section = document.querySelector(".hero");
 
   // Clearing the previously appended (if any) button-container
   const child = document.querySelector(".button-container");
-  console.log("Err"+child);
-  
+
   if (child.parentNode) {
     child.parentNode.removeChild(child);
   }
@@ -172,15 +177,16 @@ function handleButtonClick(event) {
   nextBtn.style.display = "block";
   // Do something with the selected answer
 
- 
   if (selectedAnswer === rightAns[0]) {
-    event.target.style.backgroundColor = "green"
-    console.log("You are correct!")
+    event.target.style.backgroundColor = "green";
+    console.log("You are correct!");
+    score++;
+    console.log(score);
+    scoreDisp.textContent = `Your Score is ${score}`;
   } else {
-    event.target.style.backgroundColor = "red"
-    console.log("WRONG!")
+    event.target.style.backgroundColor = "red";
+    console.log("WRONG!");
   }
-
 }
 
 const modal = document.querySelector(".modal");
@@ -204,7 +210,7 @@ btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
 document.addEventListener("keydown", function (e) {
-  console.log(e.key);
+  //console.log(e.key);
   if (e.key === "Escape" && !modal.classList.contains("hidden")) {
     closeModal();
   }
