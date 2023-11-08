@@ -182,7 +182,7 @@ function handleButtonClick(event) {
     for (let country of answerDisplay) {
       if (country.textContent === rightAns[0])
         country.style.backgroundColor = "green";
-    } 
+    }
     wrongCounter++;
     console.log("WRONG!");
     if (wrongCounter === 3) {
@@ -193,8 +193,7 @@ function handleButtonClick(event) {
   answerDisplay.forEach((button) => {
     button.disabled = true;
   });
- 
-  } 
+}
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
