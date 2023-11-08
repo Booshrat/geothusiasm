@@ -62,4 +62,8 @@ app.post("/scoreboard", (req, res) => {
   //   }
 });
 
+app.get("/scoreboard", (req, res) => {
+  res.send(scoreBoard);
+});
+
 module.exports = app;
