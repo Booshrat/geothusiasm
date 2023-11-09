@@ -169,6 +169,7 @@ function createButtons() {
 let wrongCounter = 0;
 const restartButton = document.createElement("button");
 const factInfo = document.querySelector(".info p");
+const submitScoreButton = document.querySelector("#submit-score");
 
 function handleButtonClick(event) {
   const selectedAnswer = event.target.textContent;
@@ -201,8 +202,11 @@ function handleButtonClick(event) {
     console.log("WRONG!");
     if (wrongCounter === 3) {
       console.log("stop game");
+      submitScoreButton.style.display = "block";
       restartButton.textContent = "Restart Game";
       nextBtn.style.display = "none";
+      //sectionOne.append(submitScoreButton);
+
       restartButton.addEventListener("click", () => {
         console.log("Hi");
         restartGame();
@@ -217,6 +221,7 @@ function handleButtonClick(event) {
 }
 
 function restartGame() {
+  submitScoreButton.style.display = "none";
   score = 0;
   startGame();
   wrongCounter = 0;
@@ -286,7 +291,9 @@ nextBtn.addEventListener("click", function () {
 });
 
 async function addToScoreBoard(e) {
+  console.log("Button clicked!");
   e.preventDefault();
+  submitScoreButton.style.display = "none";
   const finalScore = {
     name: playerName,
     score: score,
@@ -298,5 +305,69 @@ async function addToScoreBoard(e) {
     },
     body: JSON.stringify(finalScore),
   };
-  const response = await fetch("http://localhost:3000/scoreboard", options);
+  try {
+    const response = await fetch(
+      "https://geothusiasm-0gow.onrender.com/scoreboard",
+      options
+    );
+    // Handle response here, e.g., updating the UI to show the scoreboard
+  } catch (error) {
+    // Handle any errors that occur during fetch
+    console.error("Error submitting score:", error);
+  }
+}
+
+submitScoreButton.addEventListener("click", addToScoreBoard);
+console.log("Button click handler attached.");
+
+const allScores = document.querySelector("#leader-scores");
+
+async function retrieveScoreBoard() {
+  try {
+    const response = await fetch(
+      "https://geothusiasm-0gow.onrender.com/scoreboard"
+    );
+    const data = await response.json();
+    console.log(data);
+    top10 = data.sort((a, b) => b.score - a.score);
+    console.log(top10);
+    const topScores = data.slice(0, 10);
+    topScores.forEach((player) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${player.name}: ${player.score}`;
+      allScores.appendChild(listItem);
+    });
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+retrieveScoreBoard();
+
+const board = document.querySelector(".board");
+//const overlay = document.querySelector(".overlay");
+//const btnCloseModal = document.querySelector(".close-modal");
+const btnsOpenBoard = document.querySelector("#leader-board");
+const btnCloseBoard = document.querySelector(".close-board");
+
+const openBoard = function () {
+  console.log("Button clicked");
+  board.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+};
+
+btnsOpenBoard.addEventListener("click", openBoard);
+btnCloseBoard.addEventListener("click", closeBoard);
+overlay.addEventListener("click", closeBoard);
+
+document.addEventListener("keydown", function (e) {
+  console.log(e.key);
+  if (e.key === "Escape" && !board.classList.contains("hidden")) {
+    closeBoard();
+  }
+});
+
+function closeBoard() {
+  board.classList.add("hidden");
+  overlay.classList.add("hidden");
 }
