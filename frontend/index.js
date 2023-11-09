@@ -332,6 +332,13 @@ function closeBoard() {
 }
 
 module.exports = {
+  restartGame,
+  openModal,
+  closeModal,
+  addToScoreBoard,
+  retrieveScoreBoard,
+  openBoard,
+  closeBoard,
   buttonsToForm, 
   addToBoard, 
   startGame, 
