@@ -330,3 +330,5 @@ function closeBoard() {
   board.classList.add("hidden");
   overlay.classList.add("hidden");
 }
+
+module.exports = {};
