@@ -167,3 +167,22 @@ h1 {
   font-size: 40px;
   color: #fff;
 }
+
+.close-board {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 3rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.close-board:hover {
+  border: none;
+}
+
+#submit-score {
+  display: none;
+}

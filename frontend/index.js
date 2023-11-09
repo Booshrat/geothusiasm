@@ -193,6 +193,7 @@ function handleButtonClick(event) {
     console.log("WRONG!");
     if (wrongCounter === 3) {
       console.log("stop game");
+      submitScoreButton.style.display = "block";
       restartButton.textContent = "Restart Game";
       nextBtn.style.display = "none";
       //sectionOne.append(submitScoreButton);
@@ -211,6 +212,7 @@ function handleButtonClick(event) {
 }
 
 function restartGame() {
+  submitScoreButton.style.display = "none";
   score = 0;
   startGame();
   wrongCounter = 0;
@@ -250,6 +252,7 @@ nextBtn.addEventListener("click", randomFlag);
 async function addToScoreBoard(e) {
   console.log("Button clicked!");
   e.preventDefault();
+  submitScoreButton.style.display = "none";
   const finalScore = {
     name: playerName,
     score: score,
@@ -285,13 +288,14 @@ async function retrieveScoreBoard() {
     );
     const data = await response.json();
     console.log(data);
-    (values = data
-      .map(({ score }) => score)
-      .sort((a, b) => b - a)
-      .slice(0, 9)),
-      (top10 = data.filter(({ score }) => values.includes(score)));
+    top10 = data.sort((a, b) => b.score - a.score);
     console.log(top10);
-    allScores.textContent = top10;
+    const topScores = data.slice(0, 10);
+    topScores.forEach((player) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${player.name}: ${player.score}`;
+      allScores.appendChild(listItem);
+    });
   } catch (error) {
     console.log(error);
     return [];
@@ -303,6 +307,7 @@ const board = document.querySelector(".board");
 //const overlay = document.querySelector(".overlay");
 //const btnCloseModal = document.querySelector(".close-modal");
 const btnsOpenBoard = document.querySelector("#leader-board");
+const btnCloseBoard = document.querySelector(".close-board");
 
 const openBoard = function () {
   console.log("Button clicked");
@@ -311,7 +316,7 @@ const openBoard = function () {
 };
 
 btnsOpenBoard.addEventListener("click", openBoard);
-btnCloseModal.addEventListener("click", closeBoard);
+btnCloseBoard.addEventListener("click", closeBoard);
 overlay.addEventListener("click", closeBoard);
 
 document.addEventListener("keydown", function (e) {
