@@ -331,4 +331,15 @@ function closeBoard() {
   overlay.classList.add("hidden");
 }
 
-module.exports = {};
+module.exports = {
+  buttonsToForm, 
+  addToBoard, 
+  startGame, 
+  randomFlag, 
+  addToArray, 
+  wrongCountries, 
+  shuffle, 
+  createButtons, 
+  handleButtonClick, 
+  restartGame
+};
