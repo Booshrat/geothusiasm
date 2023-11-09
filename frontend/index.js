@@ -285,11 +285,13 @@ async function retrieveScoreBoard() {
     );
     const data = await response.json();
     console.log(data);
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i].name);
-      console.log(data[i].score);
-    }
-    allScores.textContent = data;
+    (values = data
+      .map(({ score }) => score)
+      .sort((a, b) => b - a)
+      .slice(0, 9)),
+      (top10 = data.filter(({ score }) => values.includes(score)));
+    console.log(top10);
+    allScores.textContent = top10;
   } catch (error) {
     console.log(error);
     return [];
