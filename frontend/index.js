@@ -1,4 +1,3 @@
-// const e = require("express");
 const start = document.querySelector("#start");
 const leaderBoard = document.querySelector("#leader-board");
 start.addEventListener("click", buttonsToForm);
@@ -9,7 +8,8 @@ let playerName = "";
 
 function buttonsToForm(e) {
   start.remove();
-  leaderBoard.remove();
+  // leaderBoard.remove();
+  leaderBoard.style.display = "none";
   nameEnter.style.display = "block";
 }
 
@@ -50,6 +50,21 @@ function startGame() {
   randomFlag();
   document.querySelector(".hero").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
   document.querySelector("nav").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
+
+  const navBar = document.querySelector(".nav");
+  
+  // const homePage = document.createElement("button");
+  // homePage.textContent = "Home";
+  const homePage = document.querySelector(".home");
+  homePage.textContent = "Home";
+  homePage.addEventListener("click", () => {
+    location.reload();
+  })
+  // navBar.appendChild(homePage);
+  homePage.style.display = "inline-block";
+
+  // navBar.appendChild(leaderBoard);
+  // leaderBoard.style.display = "inline-block";
 }
 
 async function randomFlag() {
@@ -167,7 +182,7 @@ function createButtons() {
   // nextBtn.style.display = "none";
 }
 let wrongCounter = 0;
-const restartButton = document.createElement("button");
+const restartButton = document.querySelector("#restart");
 const factInfo = document.querySelector(".info p");
 const submitScoreButton = document.querySelector("#submit-score");
 
@@ -202,16 +217,15 @@ function handleButtonClick(event) {
     console.log("WRONG!");
     if (wrongCounter === 3) {
       console.log("stop game");
-      submitScoreButton.style.display = "block";
-      restartButton.textContent = "Restart Game";
+      restartButton.style.display = "inline-block";
+      submitScoreButton.style.display = "inline-block";
+
       nextBtn.style.display = "none";
-      //sectionOne.append(submitScoreButton);
 
       restartButton.addEventListener("click", () => {
         console.log("Hi");
         restartGame();
       });
-      sectionOne.append(restartButton);
     }
   }
 
@@ -225,7 +239,7 @@ function restartGame() {
   score = 0;
   startGame();
   wrongCounter = 0;
-  restartButton.remove();
+  restartButton.style.display = "none";
   factInfo.style.display = "none";
   restartMessage();
 }
@@ -259,8 +273,8 @@ function restartMessage() {
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
-const btnCloseModal = document.querySelector(".close-modal");
 const btnsOpenModal = document.querySelector(".help");
+const btnCloseModal = document.querySelector(".close-modal");
 
 const openModal = function () {
   console.log("Button clicked");
@@ -278,7 +292,6 @@ btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
 document.addEventListener("keydown", function (e) {
-  //console.log(e.key);
   if (e.key === "Escape" && !modal.classList.contains("hidden")) {
     closeModal();
   }
@@ -310,7 +323,6 @@ async function addToScoreBoard(e) {
       "https://geothusiasm-0gow.onrender.com/scoreboard",
       options
     );
-    // Handle response here, e.g., updating the UI to show the scoreboard
   } catch (error) {
     // Handle any errors that occur during fetch
     console.error("Error submitting score:", error);
@@ -320,18 +332,22 @@ async function addToScoreBoard(e) {
 submitScoreButton.addEventListener("click", addToScoreBoard);
 console.log("Button click handler attached.");
 
-const allScores = document.querySelector("#leader-scores");
+let allScores = document.querySelector("#leader-scores");
 
+let data;
 async function retrieveScoreBoard() {
   try {
     const response = await fetch(
       "https://geothusiasm-0gow.onrender.com/scoreboard"
     );
-    const data = await response.json();
+    data = await response.json();
     console.log(data);
+    
     top10 = data.sort((a, b) => b.score - a.score);
     console.log(top10);
+    
     const topScores = data.slice(0, 10);
+    
     topScores.forEach((player) => {
       const listItem = document.createElement("li");
       listItem.textContent = `${player.name}: ${player.score}`;
@@ -345,9 +361,6 @@ async function retrieveScoreBoard() {
 retrieveScoreBoard();
 
 const board = document.querySelector(".board");
-//const overlay = document.querySelector(".overlay");
-//const btnCloseModal = document.querySelector(".close-modal");
-const btnsOpenBoard = document.querySelector("#leader-board");
 const btnCloseBoard = document.querySelector(".close-board");
 
 const openBoard = function () {
@@ -356,7 +369,7 @@ const openBoard = function () {
   overlay.classList.remove("hidden");
 };
 
-btnsOpenBoard.addEventListener("click", openBoard);
+leaderBoard.addEventListener("click", openBoard);
 btnCloseBoard.addEventListener("click", closeBoard);
 overlay.addEventListener("click", closeBoard);
 
@@ -371,3 +384,4 @@ function closeBoard() {
   board.classList.add("hidden");
   overlay.classList.add("hidden");
 }
+
