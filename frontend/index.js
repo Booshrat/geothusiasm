@@ -226,7 +226,7 @@ function restartGame() {
   startGame();
   wrongCounter = 0;
   restartButton.remove();
-  factInfo.remove();
+  factInfo.style.display = "none";
   restartMessage();
 }
 
