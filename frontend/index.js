@@ -331,4 +331,12 @@ function closeBoard() {
   overlay.classList.add("hidden");
 }
 
-module.exports = {};
+module.exports = {
+  restartGame,
+  openModal,
+  closeModal,
+  addToScoreBoard,
+  retrieveScoreBoard,
+  openBoard,
+  closeBoard,
+};
