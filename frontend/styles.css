@@ -16,9 +16,12 @@ body {
   display: none;
 }
 
-.help {
+.nav {
   height: 5vh;
   background-color: rgba(0, 0, 0, 0.55);
+}
+
+.help {
   position: absolute;
   left: 93%;
 }
@@ -183,6 +186,24 @@ h1 {
   border: none;
 }
 
+/* #restart-submit-btn {
+  display: flex;
+} */
+
 #submit-score {
+  display: none;
+  margin: 20px;
+}
+
+#restart {
+  display: none;
+  margin: 20px;
+}
+
+#home {
+  display: none;
+}
+
+#nav-leaderboard {
   display: none;
 }

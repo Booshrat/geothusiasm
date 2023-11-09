@@ -10,7 +10,8 @@ let playerName = "";
 
 function buttonsToForm(e) {
   start.remove();
-  leaderBoard.remove();
+  // leaderBoard.remove();
+  leaderBoard.style.display = "none";
   nameEnter.style.display = "block";
 }
 
@@ -51,6 +52,9 @@ function startGame() {
   randomFlag();
   document.querySelector(".hero").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
   document.querySelector("nav").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
+
+  homePage.style.display = "inline-block";
+  navOpenBoard.style.display = "inline-block";
 }
 
 async function randomFlag() {
@@ -165,7 +169,8 @@ function createButtons() {
   // nextBtn.style.display = "none";
 }
 let wrongCounter = 0;
-const restartButton = document.createElement("button");
+// const restartButton = document.createElement("button");
+const restartButton = document.querySelector("#restart");
 const submitScoreButton = document.querySelector("#submit-score");
 
 function handleButtonClick(event) {
@@ -193,16 +198,19 @@ function handleButtonClick(event) {
     console.log("WRONG!");
     if (wrongCounter === 3) {
       console.log("stop game");
+      
+      // const btnContainer = document.querySelector("#restart-submit-btn");
+      // btnContainer.style.display = "flex";
+      restartButton.style.display = "block";
       submitScoreButton.style.display = "block";
-      restartButton.textContent = "Restart Game";
+      // restartButton.textContent = "Restart Game";
       nextBtn.style.display = "none";
-      //sectionOne.append(submitScoreButton);
 
       restartButton.addEventListener("click", () => {
         console.log("Hi");
         restartGame();
       });
-      sectionOne.append(restartButton);
+      // sectionOne.append(restartButton);
     }
   }
 
@@ -216,13 +224,15 @@ function restartGame() {
   score = 0;
   startGame();
   wrongCounter = 0;
-  restartButton.remove();
+  // restartButton.remove();
+  restartButton.style.display = "none";
+
 }
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
-const btnCloseModal = document.querySelector(".close-modal");
 const btnsOpenModal = document.querySelector(".help");
+const btnCloseModal = document.querySelector(".close-modal");
 
 const openModal = function () {
   console.log("Button clicked");
@@ -253,6 +263,7 @@ async function addToScoreBoard(e) {
   console.log("Button clicked!");
   e.preventDefault();
   submitScoreButton.style.display = "none";
+  restartButton.style.display = "none";
   const finalScore = {
     name: playerName,
     score: score,
@@ -288,9 +299,12 @@ async function retrieveScoreBoard() {
     );
     const data = await response.json();
     console.log(data);
+    
     top10 = data.sort((a, b) => b.score - a.score);
     console.log(top10);
+    
     const topScores = data.slice(0, 10);
+    
     topScores.forEach((player) => {
       const listItem = document.createElement("li");
       listItem.textContent = `${player.name}: ${player.score}`;
@@ -330,3 +344,17 @@ function closeBoard() {
   board.classList.add("hidden");
   overlay.classList.add("hidden");
 }
+
+// Takes to home page
+const homePage = document.querySelector("#home");
+homePage.addEventListener("click", () => {
+  location.reload();
+})
+
+// Shows leaderboard from nav
+const navOpenBoard = document.querySelector("#nav-leaderboard");
+navOpenBoard.addEventListener("click", () => {
+  openBoard();
+  retrieveScoreBoard();
+});
+

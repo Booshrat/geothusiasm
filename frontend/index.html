@@ -14,8 +14,10 @@
     <script defer src="./index.js"></script>
   </head>
   <body>
-    <nav class="help">
-      <button>Help</button>
+    <nav class="nav">
+      <button id="home">Home</button>
+      <button id="nav-leaderboard">Leaderboard</button>
+      <button class="help">Help</button>
     </nav>
     <section class="hero">
       <div class="text-overlay">
@@ -61,8 +63,11 @@
           <li>Click 'Next' button to go to the next round</li>
         </ol>
       </div>
-      <div class="overlay hidden"></div>
+      <button type="button" id="restart">Restart Game</button>
       <button type="button" id="submit-score">Submit Score</button>
+      <div class="overlay hidden"></div>
     </section>
+    <div id="restart-submit-btn">
+    </div>
   </body>
 </html>
