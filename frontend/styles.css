@@ -154,3 +154,19 @@ h1 {
   font-size: 40px;
   color: #fff;
 }
+.largeStyles {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: black;
+  padding: 20rem 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  font-size: 3rem;
+}
