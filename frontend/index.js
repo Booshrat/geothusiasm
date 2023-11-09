@@ -339,4 +339,14 @@ module.exports = {
   retrieveScoreBoard,
   openBoard,
   closeBoard,
+  buttonsToForm, 
+  addToBoard, 
+  startGame, 
+  randomFlag, 
+  addToArray, 
+  wrongCountries, 
+  shuffle, 
+  createButtons, 
+  handleButtonClick, 
+  restartGame
 };
