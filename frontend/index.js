@@ -84,7 +84,10 @@ async function randomFlag() {
       // Only display the flag when the image is fully loaded
       document.querySelector("#guess-flag").style.display = "block";
     };
-    const fact = data.fact;
+
+    fact = data.fact;
+    //console.log(fact);
+
     const rightAnswer = data.country;
 
     const wrongAnswers = await wrongCountries(rightAnswer);
@@ -179,8 +182,8 @@ function createButtons() {
   // nextBtn.style.display = "none";
 }
 let wrongCounter = 0;
-// const restartButton = document.createElement("button");
 const restartButton = document.querySelector("#restart");
+const factInfo = document.querySelector(".info p");
 const submitScoreButton = document.querySelector("#submit-score");
 
 function handleButtonClick(event) {
@@ -188,9 +191,15 @@ function handleButtonClick(event) {
   const answerDisplay = document.querySelectorAll(".button-container button");
   const sectionOne = document.querySelector(".hero");
   console.log("Selected Answer:", selectedAnswer);
-
   nextBtn.style.display = "block";
+
   // Do something with the selected answer
+
+  console.log(factInfo);
+  factInfo.style.display = "block";
+  factInfo.textContent = fact;
+  factInfo.style.color = "white";
+  factInfo.style.fontSize = "24px";
 
   if (selectedAnswer === rightAns[0]) {
     event.target.style.backgroundColor = "green";
@@ -231,7 +240,35 @@ function restartGame() {
   startGame();
   wrongCounter = 0;
   restartButton.style.display = "none";
+  factInfo.style.display = "none";
+  restartMessage();
+}
 
+function restartMessage() {
+  let count = 3;
+  const newStartMessage = document.querySelector(".text-overlay");
+  if (newStartMessage.style.display === "none") {
+    newStartMessage.style.display = "block";
+  }
+  newStartMessage.innerHTML = "Game starting in " + count + " seconds...";
+  newStartMessage.classList.add("largeStyles");
+
+  let countDown = setInterval(function () {
+    count--;
+
+    if (count < 0) {
+      clearInterval(countDown);
+      newStartMessage.style.display = "none";
+    } else {
+      if (count === 1) {
+        newStartMessage.textContent =
+          "Game starting in " + count + " second...";
+      } else {
+        newStartMessage.textContent =
+          "Game starting in " + count + " seconds...";
+      }
+    }
+  }, 1000);
 }
 
 const modal = document.querySelector(".modal");
@@ -262,6 +299,9 @@ document.addEventListener("keydown", function (e) {
 
 const nextBtn = document.querySelector(".next-btn");
 nextBtn.addEventListener("click", randomFlag);
+nextBtn.addEventListener("click", function () {
+  factInfo.style.display = "none";
+});
 
 async function addToScoreBoard(e) {
   console.log("Button clicked!");
