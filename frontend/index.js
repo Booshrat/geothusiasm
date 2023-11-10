@@ -48,8 +48,7 @@ function startGame() {
   scoreDisp.textContent = `Your Score is ${score}`;
   startMessage.remove();
   randomFlag();
-  document.querySelector(".hero").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
-  document.querySelector("nav").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
+  document.querySelector(".background").style.backgroundColor = "rgba(0, 0, 0, 0.85)";
 
   const navBar = document.querySelector(".nav");
   
@@ -67,6 +66,8 @@ function startGame() {
   // leaderBoard.style.display = "inline-block";
 }
 
+const flagImg = document.querySelector("#flag-img");
+
 async function randomFlag() {
   try {
     const response = await fetch(
@@ -77,7 +78,7 @@ async function randomFlag() {
     console.log(data.flag);
     const flag = data.flag;
 
-    const flagImg = document.querySelector("#flag-img");
+    // const flagImg = document.querySelector("#flag-img");
     flagImg.setAttribute("src", flag);
 
     flagImg.onload = function () {
@@ -112,8 +113,6 @@ async function randomFlag() {
 
     console.log("Right Answer:", rightAnswer);
     console.log("Wrong Answers:", wrongAnswers);
-
-    // const nextClicked = nextBtn.addEventListener("click", );
 
     createButtons(ans);
 
@@ -158,7 +157,9 @@ function shuffle(array) {
 
 function createButtons() {
   const container = document.createElement("div");
+  // const container = document.querySelector("flag-quiz")
   container.classList.add("button-container");
+
 
   const shuffleAnswers = shuffle(ans);
 
@@ -166,6 +167,7 @@ function createButtons() {
     const button = document.createElement("button");
     button.textContent = answer;
     button.addEventListener("click", handleButtonClick);
+    button.classList.add("country-options");
     container.appendChild(button);
   });
 
@@ -193,13 +195,9 @@ function handleButtonClick(event) {
   console.log("Selected Answer:", selectedAnswer);
   nextBtn.style.display = "block";
 
-  // Do something with the selected answer
-
   console.log(factInfo);
   factInfo.style.display = "block";
   factInfo.textContent = fact;
-  factInfo.style.color = "white";
-  factInfo.style.fontSize = "24px";
 
   if (selectedAnswer === rightAns[0]) {
     event.target.style.backgroundColor = "green";
@@ -242,7 +240,7 @@ function restartGame() {
   restartButton.style.display = "none";
   factInfo.style.display = "none";
   restartMessage();
-}
+ }
 
 function restartMessage() {
   let count = 3;
@@ -334,13 +332,12 @@ console.log("Button click handler attached.");
 
 let allScores = document.querySelector("#leader-scores");
 
-let data;
 async function retrieveScoreBoard() {
   try {
     const response = await fetch(
       "https://geothusiasm-0gow.onrender.com/scoreboard"
     );
-    data = await response.json();
+    const data = await response.json();
     console.log(data);
     
     top10 = data.sort((a, b) => b.score - a.score);
@@ -351,6 +348,7 @@ async function retrieveScoreBoard() {
     topScores.forEach((player) => {
       const listItem = document.createElement("li");
       listItem.textContent = `${player.name}: ${player.score}`;
+      listItem.classList.add("score");
       allScores.appendChild(listItem);
     });
   } catch (error) {
