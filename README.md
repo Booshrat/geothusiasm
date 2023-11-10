@@ -1,3 +1,4 @@
+[![Watch the Video]([link_to_thumbnail_image](https://www.dropbox.com/scl/fi/f693gjxb77i80wt2pd7f6/geo-thumbnail.png?rlkey=5tl81n38w83z9ct38gcyri552&dl=0))]([link_to_video](https://www.dropbox.com/scl/fi/nsvrlmdmn1kt3usqjpgeg/geothusiasm.wmv?rlkey=lfds87e8fg40qax0s0wk394cg&dl=0))
 # GEOTHUSIASM
 Geothusiasm is a Geography game where you have to select the right flag. An interesting fact will be displayed for you to learn!
 ## Installation & Usage
