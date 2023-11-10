@@ -8,7 +8,7 @@ Geothusiasm is a Geography game where you have to select the right flag. An inte
 2. Navigate to the frontend folder and open index.html with LiveServer extension
 3. Click Help button on the top right of the Main menu page to read instructions on how to play
 4. Click start game and enjoy!
-## Technologies
+## Technologies & Tools
 - JavaScript
 - HTML
 - CSS
