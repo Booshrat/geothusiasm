@@ -1,4 +1,4 @@
-<img align="center" width="350px" alt="Coding" style="margin-left:100px;" src="https://github.com/Booshrat/geothusiasm/blob/main/geo-thumbnail.png" />
+<img align="center" width="500px" alt="Coding" style="margin-left:100px;" src="https://github.com/Booshrat/geothusiasm/blob/main/geo-thumbnail.png" />
 
 [![Watch the Video](https://www.dropbox.com/scl/fi/f693gjxb77i80wt2pd7f6/geo-thumbnail.png?rlkey=5tl81n38w83z9ct38gcyri552&dl=0)](https://www.dropbox.com/scl/fi/nsvrlmdmn1kt3usqjpgeg/geothusiasm.wmv?rlkey=lfds87e8fg40qax0s0wk394cg&dl=0)
 
