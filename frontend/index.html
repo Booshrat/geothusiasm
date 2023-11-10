@@ -3,56 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css" />
     <title>Geothusiasm</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <script defer src="./index.js"></script>
   </head>
   <body>
+    <div class="background">
     <nav class="nav">
-      <button class="home">Home</button>
+      <button class="home hidden">Home</button>
       <button class="help">Help</button>
     </nav>
     <section class="hero">
       <div class="text-overlay">
         <h1 id="geo">Geothusiasm</h1>
         <div class="button-container">
-          <button id="start">Start Game</button>
-          <button id="leader-board">Leaderboard</button>
-          <form id="player-name">
+          <button id="start" class="initial-btn">Start Game</button>
+          <button id="leader-board" class="initial-btn">Leaderboard</button>
+          <form id="player-name" class="hidden">
             <input
               type="type"
               placeholder="Enter Your Name"
-              class="name-input"
+              class="name-input" 
               required
             />
-            <!-- <input type="submit" value="Submit" class=""> -->
           </form>
         </div>
       </div>
       <h2 id="start-message"></h2>
-      <h3 id="score"></h3>
-      <h2 id="guess-flag">Guess The Flag</h2>
-      <img id="flag-img" />
-      <div class="info">
-        <p></p>
-      </div>
-      <button class="next-btn">Next</button>
-      <div class="board hidden">
-        <button class="close-board">&times;</button>
-        <ol id="leader-scores"></ol>
+      <div class="flag-quiz">
+        <h3 id="score"></h3>
+        <h2 id="guess-flag">Guess The Flag</h2>
+        <img id="flag-img" />
+        <div class="info">
+          <p></p>
+        </div>
+        <button class="next-btn">Next</button>
+        <div class="board hidden">
+          <button class="close-board">&times;</button>
+          <ol id="leader-scores"></ol>
+        </div>
+        <div class="restart-submit-btn">
+          <button type="button" id="restart">Restart Game</button>
+          <button type="button" id="submit-score">Submit Score</button>
+        </div>
       </div>
       <div class="modal hidden">
         <button class="close-modal">&times;</button>
         <h3>How to play</h3>
         <ol>
           <li>Click on 'Start Game' button</li>
-          <li>Insert your name and press enter or click 'Submit' button</li>
+          <li>Insert your name and press 'Enter' on your keyboard</li>
           <li>A countdown for 3 seconds will start</li>
           <li>A flag will appear on screen with 4 answer buttons</li>
           <li>
@@ -63,12 +67,14 @@
             interesting fact about the country
           </li>
           <li>Click 'Next' button to go to the next round</li>
+          <li>If you get 3 answers wrong, your game will be over</li>
+          <li>Click 'Submit Score' button to store your score in the leaderboard</li>
+          <li>Click 'Restart Game' button to restart your game</li>
+          <li>You can view top 10 scores by first clicking on 'Home' button and then 'Leaderboard' button</li>
         </ol>
       </div>
-      <div class="restart-submit-btn">
-        <button type="button" id="restart">Restart Game</button>
-        <button type="button" id="submit-score">Submit Score</button>
     </section>
+  </div>
     <div class="overlay hidden"></div>
   </body>
 </html>
