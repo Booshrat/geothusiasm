@@ -33,7 +33,7 @@ Geothusiasm is a Geography based game where you have to guess the flag. After gu
 - Assigning correct to one answer button when a randomly generated flag is brought over from the API
 ### Bugs
 - No bugs as of 10/11/2023.
-### Future featurs
+### Future features
 - Time limit for each flag.
 - Login feature.
 - Count for wrong answers.
