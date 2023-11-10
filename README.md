@@ -1,5 +1,4 @@
 # GEOTHUSIASM
-![Geothusiasm logo](./Geothusiasm.png)
 Geothusiasm is a Geography game where you have to select the right flag. An interesting fact will be displayed for you to learn!
 ## Installation & Usage
 ### Installation
